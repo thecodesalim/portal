@@ -1,0 +1,129 @@
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.main {
+  width: 100%;
+  padding: 0rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.membership {
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 14px;
+}
+.content {
+  margin-left: 30px;
+}
+.topNav {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.leftNav {
+  height: 400px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin-top: 50px;
+  margin-left: 30px;
+  padding: 10px;
+  padding-top: 30px;
+  color: #666;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: row;
+}
+
+.cardHolders {
+  display: flex;
+  flex-direction: row;
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+}
+
+.contentMain {
+  display: flex;
+  flex-direction: row;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileInfo {
+  height: 300px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.info {
+  height: 550px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.infoDetail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.photo {
+  display: grid;
+  margin-left: 60px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  background-color: rgb(255, 81, 0);
+}
+
+.value {
+  font-size: small;
+}
+
+.type {
+  font-weight: 900;
+  font-size: small;
+}
+
+.footer {
+  width: 100%;
+  height: 30px;
+  border-top: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

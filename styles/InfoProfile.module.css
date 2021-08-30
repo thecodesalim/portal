@@ -1,0 +1,20 @@
+.moreDetail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.type {
+  font-size: small;
+  margin-right: 10px;
+}
+
+.value {
+  color: #666;
+  font-size: small;
+}
+
+.edit {
+  color: rgb(49, 138, 255);
+}
