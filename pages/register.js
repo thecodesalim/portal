@@ -1,8 +1,12 @@
 import Head from "next/head";
+import { Formik, Field, Form } from "formik";
+import "react-datepicker/dist/react-datepicker.css";
 import styles from "../styles/Register.module.css";
 import Input from "../components/Input";
 import Select from "../components/Select";
 import Calender from "../components/DatePicker";
+import RadioGroup from "../components/RadioGroup";
+import Button from "../components/Button";
 
 export default function Register() {
   return (
@@ -15,75 +19,221 @@ export default function Register() {
 
       <main className={styles.main}>
         <p className={styles.header}>Register</p>
-        <div className={styles.grid}>
-          <Input title="Pin" />
-          <Input title="Title" />
-        </div>
-        <div className={styles.grid}>
-          <Input title="Surname" />
-          <Input title="First Name" />
-          <Input title="Middle Name" />
-        </div>
-        <div className={styles.grid}>
-          <Calender title="Date of Birth" />
-          <Input title="Sex" />
-          <Input title="Blood Group" />
-        </div>
-        <div className={styles.grid}>
-          <Select />
-          <Input title="Home Address" />
-        </div>
-        <div className={styles.grid}>
-          <Input title="Employer" />
-          <Input title="Office Address" />
-        </div>
-        <div className={styles.grid}>
-          <Input title="Phone No" />
-          <Input title="Email" />
-        </div>
-        <div className={styles.grid}>
-          <Input title="Vehicle Make/Model" />
-          <Input title="Vehicle Reg No." />
-        </div>
-        <div className={styles.grid}>
-          <Input title="Driving License No." />
-          <Calender title="NDL Expiration Date" />
-        </div>
-        <div className={styles.grid}>
-          <Input title="Next of Kin" />
-          <Input title="Phone No." />
-        </div>
-        <div className={styles.grid}>
-          <Input title="Date of Enlistment" />
-        </div>
-        <div className={styles.grid}>
-          <div style={{ margin: "10px" }}>
-            <span>Regalia</span>
-            <input
-              type="radio"
-              id="contactChoice1"
-              name="contact"
-              value="Yes"
-            />
-            <label for="contactChoice1">Yes</label>
-            <input type="radio" id="contactChoice1" name="contact" value="No" />
-            <label for="contactChoice1">No</label>
-          </div>
-        </div>
-        <div className={styles.grid}>
-          <div style={{ margin: "10px" }}>
-            <span>I.D</span>
-            <input
-              type="radio"
-              id="contactChoice1"
-              name="contact"
-              value="Yes"
-            />
-            <label for="contactChoice1">Yes</label>
-            <input type="radio" id="contactChoice1" name="contact" value="No" />
-            <label for="contactChoice1">No</label>
-          </div>
-        </div>
+        <Formik
+          initialValues={{
+            pin: "",
+            title: "",
+            firstName: "",
+            lastName: "",
+            middleName: "",
+            bloodGroup: "",
+            sex: "",
+            homeAddress: "",
+            employer: "",
+            officeAddress: "",
+            phoneNo: "",
+            email: "",
+            vechicleMake: "",
+            vechicleRegNo: "",
+            drivingLicenseNo: "",
+            nok: "",
+            nokPhone: "",
+            doe: new Date(),
+            dob: new Date(),
+            ndl: new Date(),
+            regalia: "",
+            id: "",
+          }}
+          onSubmit={async (values) => {
+            await new Promise((r) => setTimeout(r, 500));
+            alert(JSON.stringify(values, null, 2));
+          }}
+        >
+          <Form>
+            <div className={styles.grid}>
+              <Input
+                title="Pin"
+                htmlFor="pin"
+                id="pin"
+                name="pin"
+                placeholder=""
+              />
+              <Input
+                title="Title"
+                htmlFor="title"
+                id="title"
+                name="title"
+                placeholder=""
+              />
+            </div>
+            <div className={styles.grid}>
+              <Input
+                title="First Name"
+                htmlFor="firstName"
+                id="firstName"
+                name="firstName"
+                placeholder=""
+              />
+              <Input
+                title="Last Name"
+                htmlFor="lastName"
+                id="lastName"
+                name="lastName"
+                placeholder=""
+              />
+              <Input
+                title="Middle Name"
+                htmlFor="middleName"
+                id="middleName"
+                name="middleName"
+                placeholder=""
+              />
+            </div>
+            <div className={styles.grid}>
+              <Calender name="dob" title="Date of Birth" />
+              <Input
+                title="Sex"
+                htmlFor="sex"
+                id="sex"
+                name="sex"
+                placeholder=""
+              />
+              <Input
+                title="Blood Group"
+                htmlFor="bloodGroup"
+                id="bloodGroup"
+                name="bloodGroup"
+                placeholder=""
+              />
+            </div>
+            <div className={styles.grid}>
+              <Select />
+              <Input
+                title="Home Address"
+                htmlFor="homeAddress"
+                id="homeAddress"
+                name="homeAddress"
+                placeholder=""
+              />
+            </div>
+            <div className={styles.grid}>
+              <Input
+                title="Employer"
+                htmlFor="employer"
+                id="employer"
+                name="employer"
+                placeholder=""
+              />
+              <Input
+                title="Office Address"
+                htmlFor="officeAddress"
+                id="officeAddress"
+                name="officeAddress"
+                placeholder=""
+              />
+            </div>
+            <div className={styles.grid}>
+              <Input
+                title="Phone No"
+                htmlFor="phoneNo"
+                id="phoneNo"
+                name="phoneNo"
+                placeholder=""
+                type="tel"
+              />
+              <Input
+                title="Email"
+                htmlFor="email"
+                id="email"
+                name="email"
+                placeholder=""
+                type="email"
+              />
+            </div>
+            <div className={styles.grid}>
+              <Input
+                title="Vehicle Make/Model"
+                htmlFor="vechicleMake"
+                id="vechicleMake"
+                name="vechicleMake"
+                placeholder=""
+              />
+              <Input
+                title="Vehicle Reg No"
+                htmlFor="vechicleRegNo"
+                id="vechicleRegNo"
+                name="vechicleRegNo"
+                placeholder=""
+              />
+            </div>
+            <div className={styles.grid}>
+              <Input
+                title="Driving License No"
+                htmlFor="drivingLicenseNo"
+                id="drivingLicenseNo"
+                name="drivingLicenseNo"
+                placeholder=""
+              />
+              {/* <Calender title="NDL Expiration Date" /> */}
+              <Calender name="ndl" title="NDL Expiration Date" />
+            </div>
+            <div className={styles.grid}>
+              <Input
+                title="Next of Kin"
+                htmlFor="nok"
+                id="nok"
+                name="nok"
+                placeholder=""
+              />
+              <Input
+                title="Phone No"
+                htmlFor="nokPhone"
+                id="nokPhone"
+                name="nokPhone"
+                placeholder=""
+                type="tel"
+              />
+            </div>
+            <div className={styles.grid}>
+              <Calender name="doe" title="Date of Enlistment" />
+            </div>
+            <div className={styles.grid}>
+              <div style={{ margin: "10px" }}>
+                <div id="my-radio-group">Regalia</div>
+                <div role="group" aria-labelledby="my-radio-group">
+                  <label>
+                    <Field type="radio" name="regalia" value="No" />
+                    No
+                  </label>
+                  <label>
+                    <Field type="radio" name="regalia" value="Yes" />
+                    Yes
+                  </label>
+                  {/* <div>Picked: {values.picked}</div> */}
+                </div>
+              </div>
+            </div>
+            <div className={styles.grid}>
+              <div style={{ margin: "10px" }}>
+                <div id="my-radio-group">I.D</div>
+                <div role="group" aria-labelledby="my-radio-group">
+                  <label>
+                    <Field type="radio" name="id" value="No" />
+                    No
+                  </label>
+                  <label>
+                    <Field type="radio" name="id" value="Yes" />
+                    Yes
+                  </label>
+                  {/* <div>Picked: {values.picked}</div> */}
+                </div>
+              </div>
+            </div>
+
+            {/* <Button title="Register" width="300px" /> */}
+            <button type="submit">Submit</button>
+          </Form>
+        </Formik>
       </main>
 
       <footer className={styles.footer}>Made with ❤️ by Debug Lab</footer>

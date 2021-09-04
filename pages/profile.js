@@ -1,10 +1,11 @@
 import Head from "next/head";
+import React from "react";
+import Modal from "react-modal";
 import styles from "../styles/Profile.module.css";
 import InfoContent from "../components/InfoContent";
 import InfoProfile from "../components/infoProfile";
-import React from "react";
-import ReactDOM from "react-dom";
-import Modal from "react-modal";
+import EditModal from "../components/EditModal";
+import Button from "../components/Button";
 
 const customStyles = {
   content: {
@@ -17,12 +18,13 @@ const customStyles = {
   },
 };
 
-export default function Home() {
+export default function Home({ data }) {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
     setIsOpen(true);
+    console.log(data);
   }
 
   function afterOpenModal() {
@@ -44,7 +46,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.topNav}>
           <div>
-            <button onClick={openModal}>Open Modal</button>
+            {/* <button onClick={openModal}>Open Modal</button> */}
             <Modal
               isOpen={modalIsOpen}
               onAfterOpen={afterOpenModal}
@@ -52,16 +54,11 @@ export default function Home() {
               style={customStyles}
               contentLabel="Example Modal"
             >
-              <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-              <button onClick={closeModal}>close</button>
-              <div>I am a modal</div>
-              <form>
-                <input />
-                <button>tab navigation</button>
-                <button>stays</button>
-                <button>inside</button>
-                <button>the modal</button>
-              </form>
+              <h3 ref={(_subtitle) => (subtitle = _subtitle)}>
+                Edit Personal Information
+              </h3>
+              {/* <EditModal /> */}
+              <Button title="Save" width="100px" />
             </Modal>
           </div>
           <p style={{ fontSize: "small" }}>Logo</p>
@@ -83,18 +80,8 @@ export default function Home() {
               <div className={styles.profile}>
                 <div className={styles.profileInfo}>
                   <div className={styles.photo}></div>
-                  <div className={styles.infoDetail}>
-                    <p className={styles.type}>Registration Date</p>
-                    <p className={styles.value}>42165</p>
-                  </div>
-                  <div className={styles.infoDetail}>
-                    <p className={styles.type}>Grade</p>
-                    <p className={styles.value}>Member</p>
-                  </div>
-                  <div className={styles.infoDetail}>
-                    <p className={styles.type}>Status</p>
-                    <p className={styles.value}>Active</p>
-                  </div>
+                  <InfoContent type="Grade" value="Member" />
+                  <InfoContent type="Status" value="Active" />
                 </div>
                 <div className={styles.profileInfo}>
                   <p style={{ fontWeight: "bold" }}>About Me</p>
@@ -111,7 +98,10 @@ export default function Home() {
                   <p style={{ fontWeight: "bold", padding: "10px" }}>
                     Personal Infomation
                   </p>
-                  <p style={{ color: "rgb(49, 138, 255)", padding: "10px" }}>
+                  <p
+                    style={{ color: "rgb(49, 138, 255)", padding: "10px" }}
+                    onClick={openModal}
+                  >
                     Edit
                   </p>
                 </div>
@@ -140,4 +130,21 @@ export default function Home() {
       <footer className={styles.footer}>Made with ❤️ by Debug Lab</footer>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const res = await fetch(
+    `https://6133cf387859e700176a37b7.mockapi.io/api/info/info`
+  );
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { data },
+  };
 }

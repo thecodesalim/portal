@@ -1,6 +1,7 @@
 import Head from "next/head";
+import Link from "next/link";
 import styles from "../styles/Login.module.css";
-import Input from "../components/Input";
+import Button from "../components/Button";
 
 export default function LogIn() {
   return (
@@ -12,8 +13,18 @@ export default function LogIn() {
       </Head>
 
       <main className={styles.main}>
-        <Input title="Email" />
-        <Input title="Password" />
+        <h1>Log In</h1>
+        <div className={styles.grid}>
+          <input className={styles.input} placeholder="Email" type="email" />
+          <input
+            className={styles.input}
+            placeholder="Password"
+            type="password"
+          />
+          <Link href="/">
+            <a>Log In</a>
+          </Link>
+        </div>
       </main>
 
       <footer className={styles.footer}>Made with ❤️ by Debug Lab</footer>
