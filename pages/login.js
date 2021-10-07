@@ -13,17 +13,20 @@ export default function LogIn() {
       </Head>
 
       <main className={styles.main}>
-        <h1>Log In</h1>
-        <div className={styles.grid}>
-          <input className={styles.input} placeholder="Email" type="email" />
-          <input
-            className={styles.input}
-            placeholder="Password"
-            type="password"
-          />
-          <Link href="/">
-            <a>Log In</a>
-          </Link>
+        <div className={styles.box}>
+          <h1>Log In</h1>
+          <div className={styles.grid}>
+            <input className={styles.input} placeholder="Email" type="email" />
+            <input
+              className={styles.input}
+              placeholder="Password"
+              type="password"
+            />
+            <Link href="/">
+              <a>Log In</a>
+            </Link>
+            <Button title="Log In" />
+          </div>
         </div>
       </main>
 

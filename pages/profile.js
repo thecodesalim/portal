@@ -1,11 +1,20 @@
 import Head from "next/head";
 import React from "react";
 import Modal from "react-modal";
+import {
+  AiOutlineAccountBook,
+  AiOutlineCreditCard,
+  AiOutlineUser,
+  AiOutlineHome,
+  AiOutlineTransaction,
+  AiOutlineStar,
+} from "react-icons/ai";
+
 import styles from "../styles/Profile.module.css";
 import InfoContent from "../components/InfoContent";
 import InfoProfile from "../components/infoProfile";
-import EditModal from "../components/EditModal";
 import Button from "../components/Button";
+import NavButton from "../components/NavButton";
 
 const customStyles = {
   content: {
@@ -21,10 +30,10 @@ const customStyles = {
 export default function Home({ data }) {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [info, setInfo] = React.useState(data[data.length - 1]);
 
   function openModal() {
     setIsOpen(true);
-    console.log(data);
   }
 
   function afterOpenModal() {
@@ -45,34 +54,48 @@ export default function Home({ data }) {
 
       <main className={styles.main}>
         <div className={styles.topNav}>
-          <div>
-            {/* <button onClick={openModal}>Open Modal</button> */}
-            <Modal
-              isOpen={modalIsOpen}
-              onAfterOpen={afterOpenModal}
-              onRequestClose={closeModal}
-              style={customStyles}
-              contentLabel="Example Modal"
-            >
-              <h3 ref={(_subtitle) => (subtitle = _subtitle)}>
-                Edit Personal Information
-              </h3>
-              {/* <EditModal /> */}
-              <Button title="Save" width="100px" />
-            </Modal>
-          </div>
-          <p style={{ fontSize: "small" }}>Logo</p>
+          <p>Logo</p>
           <div className={styles.right}>
-            <p style={{ fontSize: "small" }}>Ahmed Ahmed</p>
+            <p>Hi, {info.firstname}</p>
           </div>
         </div>
-
+        <div>
+          <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+            <h3 ref={(_subtitle) => (subtitle = _subtitle)}>
+              Edit Personal Information
+            </h3>
+            {/* <EditModal /> */}
+            <Button title="Save" width="100px" />
+          </Modal>
+        </div>
         <div className={styles.dashboard}>
           <nav className={styles.leftNav}>
-            <p>Dashboard</p>
-            <p>Profile</p>
-            <p>Financials</p>
-            <p>Make Payment</p>
+            <NavButton
+              title="Dashboard"
+              page="/"
+              icon={<AiOutlineHome size={28} />}
+            />
+            <NavButton
+              title="Profile"
+              page="/profile"
+              icon={<AiOutlineUser size={28} />}
+            />
+            <NavButton
+              title="Financials"
+              page="/financials"
+              icon={<AiOutlineAccountBook size={28} />}
+            />
+            <NavButton
+              title="Make Payment"
+              page="/profile"
+              icon={<AiOutlineCreditCard size={28} />}
+            />
           </nav>
           <div className={styles.content}>
             <p>Profile</p>
@@ -106,19 +129,22 @@ export default function Home({ data }) {
                   </p>
                 </div>
                 <div>
-                  <InfoProfile type="Registration No." value="004602/2015" />
-                  <InfoProfile type="Full Name." value="Ahmed Ahmed" />
+                  <InfoProfile type="Pin" value={info.pin} />
+                  <InfoProfile
+                    type="Full Name."
+                    value={`${info.firstname} ${info.lastname}`}
+                  />
                   <InfoProfile type="Grade" value="Member" />
                   <InfoProfile
                     type="Contact Address"
-                    value="9, AUDU OGBEH STREET,JABI, ABUJA,JABI ABUJA"
+                    value={info.home_address}
                   />
-                  <InfoProfile type="Phone No." value="080xxxxxxxx" />
-                  <InfoProfile type="E-Mail" value="a.ahmed@ptdf.gov.ng" />
-                  <InfoProfile type="Employer's Name" value="PTDF ABUJA" />
+                  <InfoProfile type="Phone No." value={info.phone} />
+                  <InfoProfile type="E-Mail" value={info.email} />
+                  <InfoProfile type="Employer's Name" value={info.employer} />
                   <InfoProfile
                     type="Employer's Address"
-                    value="PTDF TOWER, MEMORIAL CLOSE,OPP. SHEHU YARADUA CENTRE, ABUJA"
+                    value={info.office_address}
                   />
                 </div>
               </div>

@@ -1,8 +1,21 @@
+import React from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Card from "../components/Card";
+import NavButton from "../components/NavButton";
+import { BiAward } from "react-icons/bi";
+import {
+  AiOutlineAccountBook,
+  AiOutlineCreditCard,
+  AiOutlineUser,
+  AiOutlineHome,
+  AiOutlineTransaction,
+  AiOutlineStar,
+} from "react-icons/ai";
+import { capitalizeFirstLetter } from "../utils/utils";
 
-export default function Home() {
+export default function Home({ data }) {
+  const [info, setInfo] = React.useState(data[data.length - 1]);
   return (
     <div className={styles.container}>
       <Head>
@@ -15,34 +28,72 @@ export default function Home() {
         <div className={styles.topNav}>
           <p>Logo</p>
           <div className={styles.right}>
-            <p>Ahmed Ahmed</p>
+            <p>Hi, {capitalizeFirstLetter(info.firstname)}</p>
           </div>
         </div>
 
         <div className={styles.dashboard}>
           <nav className={styles.leftNav}>
-            <p>Dashboard</p>
-            <p>Profile</p>
-            <p>Financials</p>
-            <p>Make Payment</p>
+            <NavButton
+              title="Dashboard"
+              page="/"
+              icon={<AiOutlineHome size={28} />}
+            />
+            <NavButton
+              title="Profile"
+              page="/profile"
+              icon={<AiOutlineUser size={28} />}
+            />
+            <NavButton
+              title="Financials"
+              page="/financials"
+              icon={<AiOutlineAccountBook size={28} />}
+            />
+            <NavButton
+              title="Make Payment"
+              page="/profile"
+              icon={<AiOutlineCreditCard size={28} />}
+            />
           </nav>
           <div className={styles.content}>
             <p>Dashboard</p>
             <div className={styles.cardHolders}>
               <div>
-                <Card title="Subscription Balance" type="NGN 0" />
+                <Card
+                  title="Subscription Balance"
+                  type="NGN 0"
+                  icon={<AiOutlineTransaction size={42} />}
+                />
                 <div className={styles.membership}>
-                  <p>Membership Detail:</p>
+                  <p>
+                    <span className={styles.greyText}>Membership Detail:</span>{" "}
+                    Active
+                  </p>
                   <div>
-                    <p>Full Name:</p>
-                    <p>Registration Number:</p>
-                    <p>Date Registered:</p>
+                    <p>
+                      <span className={styles.greyText}>Full Name:</span>{" "}
+                      {`${capitalizeFirstLetter(
+                        info.firstname
+                      )} ${capitalizeFirstLetter(info.lastname)}`}
+                    </p>
+                    <p>
+                      <span className={styles.greyText}>
+                        Registration Number:
+                      </span>
+                    </p>
+                    <p>
+                      <span className={styles.greyText}>Date Registered:</span>
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <Card title="Grade" type="Member" />
-              <Card title="Membership Status" type="Active" />
+              <Card title="Grade" type="Member" icon={<BiAward size={42} />} />
+              <Card
+                title="Membership Status"
+                type="Active"
+                icon={<AiOutlineStar size={42} />}
+              />
             </div>
           </div>
         </div>
@@ -51,4 +102,21 @@ export default function Home() {
       <footer className={styles.footer}>Made with ❤️ by Debug Lab</footer>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const res = await fetch(
+    `https://6133cf387859e700176a37b7.mockapi.io/api/info/info`
+  );
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { data },
+  };
 }

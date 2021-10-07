@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-weight: 700;
+}
+
+.info_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  /* margin-left: -9px; */
+}

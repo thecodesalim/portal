@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "formik": "^2.2.9",
+    "framer-motion": "^4.1.17",
     "next": "11.1.0",
     "react": "17.0.2",
     "react-country-region-selector": "^3.3.0",
     "react-datepicker": "^4.2.1",
     "react-dom": "17.0.2",
+    "react-icons": "^4.2.0",
     "react-modal": "^3.14.3"
   },
   "devDependencies": {

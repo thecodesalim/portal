@@ -5,10 +5,22 @@ import styles from "../styles/Register.module.css";
 import Input from "../components/Input";
 import Select from "../components/Select";
 import Calender from "../components/DatePicker";
-import RadioGroup from "../components/RadioGroup";
 import Button from "../components/Button";
 
 export default function Register() {
+  const registerUser = async (data) => {
+    const res = await fetch(
+      "https://6133cf387859e700176a37b7.mockapi.io/api/info/info",
+      {
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      }
+    );
+    console.log(res, "response");
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -23,28 +35,30 @@ export default function Register() {
           initialValues={{
             pin: "",
             title: "",
-            firstName: "",
-            lastName: "",
-            middleName: "",
-            bloodGroup: "",
+            firstname: "",
+            lastname: "",
+            middlename: "",
+            bloodgroup: "",
             sex: "",
-            homeAddress: "",
+            sog: "",
+            home_address: "",
             employer: "",
-            officeAddress: "",
-            phoneNo: "",
+            office_address: "",
+            phone: "",
             email: "",
-            vechicleMake: "",
-            vechicleRegNo: "",
-            drivingLicenseNo: "",
+            vehicle_make: "",
+            vehicle_reg_no: "",
+            driving_license_no: "",
             nok: "",
-            nokPhone: "",
+            nok_phone: "",
             doe: new Date(),
             dob: new Date(),
-            ndl: new Date(),
+            ndl_expiration_date: new Date(),
             regalia: "",
-            id: "",
+            idcard: "",
           }}
           onSubmit={async (values) => {
+            await registerUser(values);
             await new Promise((r) => setTimeout(r, 500));
             alert(JSON.stringify(values, null, 2));
           }}
@@ -69,23 +83,23 @@ export default function Register() {
             <div className={styles.grid}>
               <Input
                 title="First Name"
-                htmlFor="firstName"
-                id="firstName"
-                name="firstName"
+                htmlFor="firstname"
+                id="firstname"
+                name="firstname"
                 placeholder=""
               />
               <Input
                 title="Last Name"
-                htmlFor="lastName"
-                id="lastName"
-                name="lastName"
+                htmlFor="lastname"
+                id="lastname"
+                name="lastname"
                 placeholder=""
               />
               <Input
                 title="Middle Name"
-                htmlFor="middleName"
-                id="middleName"
-                name="middleName"
+                htmlFor="middlename"
+                id="middlename"
+                name="middlename"
                 placeholder=""
               />
             </div>
@@ -100,19 +114,19 @@ export default function Register() {
               />
               <Input
                 title="Blood Group"
-                htmlFor="bloodGroup"
-                id="bloodGroup"
-                name="bloodGroup"
+                htmlFor="bloodgroup"
+                id="bloodgroup"
+                name="bloodgroup"
                 placeholder=""
               />
             </div>
             <div className={styles.grid}>
-              <Select />
+              <Select name="sog" />
               <Input
                 title="Home Address"
-                htmlFor="homeAddress"
-                id="homeAddress"
-                name="homeAddress"
+                htmlFor="home_address"
+                id="home_address"
+                name="home_address"
                 placeholder=""
               />
             </div>
@@ -126,18 +140,18 @@ export default function Register() {
               />
               <Input
                 title="Office Address"
-                htmlFor="officeAddress"
-                id="officeAddress"
-                name="officeAddress"
+                htmlFor="office_address"
+                id="office_address"
+                name="office_address"
                 placeholder=""
               />
             </div>
             <div className={styles.grid}>
               <Input
                 title="Phone No"
-                htmlFor="phoneNo"
-                id="phoneNo"
-                name="phoneNo"
+                htmlFor="phone"
+                id="phone"
+                name="phone"
                 placeholder=""
                 type="tel"
               />
@@ -153,29 +167,32 @@ export default function Register() {
             <div className={styles.grid}>
               <Input
                 title="Vehicle Make/Model"
-                htmlFor="vechicleMake"
-                id="vechicleMake"
-                name="vechicleMake"
+                htmlFor="vehicle_make"
+                id="vehicle_make"
+                name="vehicle_make"
                 placeholder=""
               />
               <Input
                 title="Vehicle Reg No"
-                htmlFor="vechicleRegNo"
-                id="vechicleRegNo"
-                name="vechicleRegNo"
+                htmlFor="vehicle_reg_no"
+                id="vehicle_reg_no"
+                name="vehicle_reg_no"
                 placeholder=""
               />
             </div>
             <div className={styles.grid}>
               <Input
                 title="Driving License No"
-                htmlFor="drivingLicenseNo"
-                id="drivingLicenseNo"
-                name="drivingLicenseNo"
+                htmlFor="driving_license_no"
+                id="driving_license_no"
+                name="driving_license_no"
                 placeholder=""
               />
               {/* <Calender title="NDL Expiration Date" /> */}
-              <Calender name="ndl" title="NDL Expiration Date" />
+              <Calender
+                name="ndl_expiration_date"
+                title="NDL Expiration Date"
+              />
             </div>
             <div className={styles.grid}>
               <Input
@@ -187,9 +204,9 @@ export default function Register() {
               />
               <Input
                 title="Phone No"
-                htmlFor="nokPhone"
-                id="nokPhone"
-                name="nokPhone"
+                htmlFor="nok_phone"
+                id="nok_phone"
+                name="nok_phone"
                 placeholder=""
                 type="tel"
               />
@@ -218,20 +235,23 @@ export default function Register() {
                 <div id="my-radio-group">I.D</div>
                 <div role="group" aria-labelledby="my-radio-group">
                   <label>
-                    <Field type="radio" name="id" value="No" />
+                    <Field type="radio" name="idcard" value="No" />
                     No
                   </label>
                   <label>
-                    <Field type="radio" name="id" value="Yes" />
+                    <Field type="radio" name="idcard" value="Yes" />
                     Yes
                   </label>
                   {/* <div>Picked: {values.picked}</div> */}
                 </div>
               </div>
             </div>
-
-            {/* <Button title="Register" width="300px" /> */}
-            <button type="submit">Submit</button>
+            <Button
+              title="Register"
+              type="submit"
+              width="100px"
+              onClick={() => console.log("SALIM")}
+            />
           </Form>
         </Formik>
       </main>

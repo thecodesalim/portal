@@ -5,7 +5,8 @@ export default function Button(props) {
     <button
       className={styles.button}
       style={{ width: props.width, backgroundColor: props.bg }}
-      type="button"
+      type={props.type}
+      onClick={props.onClick}
     >
       {props.title}
     </button>

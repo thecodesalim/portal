@@ -25,7 +25,8 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .content {
-  margin-left: 30px;
+  margin-left: 120px;
+  width: 600px;
 }
 .topNav {
   padding: 5px;
@@ -55,8 +56,9 @@
 }
 
 .cardHolders {
-  display: flex;
-  flex-direction: row;
+  border-radius: 5px;
+  background-color: #ffff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .right {
